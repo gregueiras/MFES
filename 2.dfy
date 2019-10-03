@@ -16,5 +16,8 @@ ensures f == fact(n)
   {
     i := i + 1;
     f := f * i;
+
+    //assert f == fact(i);
   }
 }
+

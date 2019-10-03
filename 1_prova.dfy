@@ -7,7 +7,7 @@ function fib(n : nat ) : nat
 method computeFib (n : nat) returns (x : nat)
 ensures fib(n) == x
 {
-  var i := 0;
+  var i := 0; // {I}
   x := 0;
   var y := 1;
   
@@ -16,9 +16,11 @@ ensures fib(n) == x
     invariant x == fib(i)
     invariant y == fib(i + 1)
     invariant i <= n
-  {
-    x, y := y, x + y; // multiple assignment
-    i := i + 1;
+  { 
+    // {x = fib(i ) AND y = fib(i + 1) AND 0 <= i <= n }
+    // {y = fib(i + 1) AND x + y = fib(i + 2) AND 0 <= i +1 <= n}
+    x, y := y, x + y; // multiple assignment {x = fib(i + 1) AND y = fib(i + 2) AND 0 <= i + 1 <= n }
+    i := i + 1; // {I}
   }
 }
 
