@@ -30,6 +30,7 @@ method bubbleSort(a: array<T>)
       decreases  i - 1 - j
         invariant forall l, r :: 0 <= l < r < a.Length && (r >= i || r == j) ==> a[l] <= a[r] // o j é maior ou igual a todos os elementos à esquerda
         invariant 0 <= j < i // como alteramos o j, é boa prática dar a gama de valores que i pode tomar
+        invariant multiset(a[..]) == multiset(old(a[..]))
     {
         if (a[j] > a[j+1]) 
         { 
