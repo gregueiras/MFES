@@ -1,0 +1,39 @@
+never OnlyOneLeader {    /* !([] ((nr_leaders==0))) */
+T0_init:
+	do
+	:: atomic { (! (((nr_leaders==0)))) -> assert(!(! (((nr_leaders==0))))) }
+	:: (1) -> goto T0_init
+	od;
+accept_all:
+	skip
+}
+never AlwaysAtMostOneLeader {    /* !([] (((nr_leaders==0)) || (((nr_leaders>0)) && ((nr_leaders==1))))) */
+T0_init:
+	do
+	:: atomic { (! ((((nr_leaders==0)) || (((nr_leaders>0)) && ((nr_leaders==1)))))) -> assert(!(! ((((nr_leaders==0)) || (((nr_leaders>0)) && ((nr_leaders==1))))))) }
+	:: (1) -> goto T0_init
+	od;
+accept_all:
+	skip
+}
+never AlwaysALeaderElectedEventually {    /* !(<> ([] ((nr_leaders>0)))) */
+T0_init:
+	do
+	:: (! (((nr_leaders>0)))) -> goto accept_S9
+	:: (1) -> goto T0_init
+	od;
+accept_S9:
+	do
+	:: (1) -> goto T0_init
+	od;
+}
+never NoLeaderUntilElected {    /* !(((nr_leaders==0)) U ((nr_leaders>0))) */
+accept_init:
+T0_init:
+	do
+	:: (! (((nr_leaders>0)))) -> goto T0_init
+	:: atomic { (! (((nr_leaders==0))) && ! (((nr_leaders>0)))) -> assert(!(! (((nr_leaders==0))) && ! (((nr_leaders>0))))) }
+	od;
+accept_all:
+	skip
+}
