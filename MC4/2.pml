@@ -7,13 +7,13 @@ bit doorisopen[3];
 chan openclosedoor=[0] of {byte,bit};
 
 
-#define open1 doorisopen[1]
-#define open2 doorisopen[2]
-#define open3 doorisopen[3]
+#define open1 doorisopen[0]
+#define open2 doorisopen[1]
+#define open3 doorisopen[2]
 
-#define close1 !doorisopen[1]
-#define close2 !doorisopen[2]
-#define close3 !doorisopen[3]
+#define close1 !doorisopen[0]
+#define close2 !doorisopen[1]
+#define close3 !doorisopen[2]
 
 #define open (open1 || open2 || open3 )
 #define close (close1 || close2 || close3 )
@@ -66,9 +66,9 @@ ltl p2 { [](
           (open3 -> floor3)
       )}
 ltl p3 { [](moving -> close) }
-//ltl p3 { [](open -> !moving) }
+ltl p3_ { [](open -> !moving) }
 
 ltl p4 { <> open }
 
-//ltl p5 { []<>(floor1)} TODO: Porque não?
 ltl p5 { [](!floor1 -> <>floor1)}
+ltl p5_ { []<>(floor1)} //TODO: Porque não?
