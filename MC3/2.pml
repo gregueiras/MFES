@@ -5,8 +5,8 @@ bit x = 1
 #define crit0 c[0]
 #define crit1 c[1]
 
-#define wants0 (x == 1 || !b[1])
-#define wants1 (x == 0 || !b[0])
+#define wants0 (b[0] && x == 0)
+#define wants1 (b[1] && x == 1)
 
 active [2] proctype P() {
 
