@@ -1,6 +1,4 @@
-
-
-bit b[2] = {true, false}
+bit b[2] = {false, false}
 bit c[2] = {false, false}
 bit x = 1
 
